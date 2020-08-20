@@ -22,7 +22,7 @@ class Round {
     this.turns++;
     // consider breaking this functionality into Deck.js
     // the Law of Demeter
-    this.deck.push(this.deck.shift());
+    this.deck.shift();
     return this.turn.giveFeedback();
     // maybe turn this.takeTurn into a handler function
     // consider the readability
@@ -38,8 +38,8 @@ class Round {
 
   endRound() {
     console.log(`** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`);
-    return `** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`;
-    // fix this in the testing suite
+    return process.exit();
+    // return `** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`;
   }
 }
 
