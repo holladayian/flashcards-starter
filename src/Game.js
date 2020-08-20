@@ -11,21 +11,26 @@ class Game {
     this.currentRound = null;
   }
 
-// consider removing deck from the parameters, because we can access it through round
+  // consider removing deck from the parameters, because we can access it through round
   printMessage(deck, round) {
-      console.log(`Welcome to FlashCards! You are playing with ${deck.countCards()} cards.
+    console.log(`Welcome to FlashCards! You are playing with ${deck.countCards()} cards.
 -----------------------------------------------------------------------`)
   }
 
   printQuestion(round) {
-      util.main(round);
+    util.main(round);
   }
 
   start() {
-    const cardList = prototypeQuestions.map(card => new Card(card['id'], card['question'], card['answers'], card['correctAnswer'] ));
+    const cardList = prototypeQuestions.map(card =>
+      new Card(
+        card['id'],
+        card['question'],
+        card['answers'],
+        card['correctAnswer']
+      ));
     // consider breaking this into smaller functions
     const deck = new Deck(cardList);
-    console.log(deck);
     this.currentRound = new Round(deck);
     this.printMessage(deck);
     this.printQuestion(this.currentRound);
