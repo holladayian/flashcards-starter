@@ -12,7 +12,7 @@ class Turn {
   }
 
   returnCard() {
-    return this.card;
+    return this.flashCard;
   }
 
   evaluateGuess() {

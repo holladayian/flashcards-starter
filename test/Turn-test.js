@@ -4,7 +4,7 @@ const expect = chai.expect;
 const Turn = require('../src/Turn');
 const Card = require('../src/Card');
 
-describe('Card', function() {
+describe('Turn', function() {
 
   it('should be a function', function() {
     const turn = new Turn();
@@ -36,7 +36,7 @@ describe('Card', function() {
   it('should return a card', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('Tuna Fish', card);
-    expect(turn.returnCard()).to.equal(turn.card);
+    expect(turn.returnCard()).to.equal(turn.flashCard);
   });
 
   it('should evaluate a users answer', function() {

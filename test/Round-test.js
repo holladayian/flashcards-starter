@@ -42,7 +42,7 @@ describe('Round', function() {
 
     round.takeTurn('Water Malone');
 
-    expect(round.guess).to.be.an.instanceof(Turn);
+    expect(round.turn).to.be.an.instanceof(Turn);
   });
 
   it('should be able to count turns', function() {
@@ -103,7 +103,7 @@ describe('Round', function() {
     round.takeTurn('A Pirate!');
     round.takeTurn('gallbladder');
 
-    expect(round.calculatePercentCorrect()).to.equal(0.5);
+    expect(round.calculatePercentCorrect()).to.equal(50);
   });
 
   it('should be able to end a round', function() {
@@ -118,8 +118,5 @@ describe('Round', function() {
 
     expect(round.endRound()).to.equal('** Round over! ** You answered 50% of the questions correctly!');
   });
-
-
-
 
 });
