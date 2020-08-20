@@ -1,4 +1,3 @@
-const util = require('./util');
 const Turn = require('./Turn');
 
 
@@ -7,8 +6,7 @@ class Round {
     this.deck = deck.cardList;
     this.turns = 0;
     this.incorrectGuesses = [];
-    this.guess;
-
+    this.turn;
   }
 
   returnCurrentCard() {
@@ -16,28 +14,32 @@ class Round {
   }
 
   takeTurn(guess) {
+    this.turn = new Turn(guess, this.returnCurrentCard());
+    // change this.turn to be a parameter
     if (guess !== this.returnCurrentCard().correctAnswer) {
       this.incorrectGuesses.push(guess);
     }
-    this.guess = new Turn(guess, this.returnCurrentCard());
-    // change this.guess to be a parameter
     this.turns++;
-    this.deck.push(this.deck.shift());
-    return this.guess.giveFeedback();
+    // consider breaking this functionality into Deck.js
+    // the Law of Demeter
+    this.deck.shift();
+    return this.turn.giveFeedback();
+    // maybe turn this.takeTurn into a handler function
+    // consider the readability
   }
 
   calculatePercentCorrect() {
     if (this.incorrectGuesses.length > 0) {
-      return (1 - this.incorrectGuesses.length / this.turns);
+      return (100 * (1 - this.incorrectGuesses.length / this.turns));
     } else {
       return 'a hunnit'
     }
   }
 
   endRound() {
-    return `** Round over! ** You answered ${100 * this.calculatePercentCorrect()}% of the questions correctly!`;
-    // this needs to console.log
-    // prolly change cacl%Correct
+    console.log(`** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`);
+    return process.exit();
+    // return `** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`;
   }
 }
 

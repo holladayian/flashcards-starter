@@ -1,4 +1,3 @@
-const util = require('./util');
 
 
 class Turn {
@@ -12,7 +11,7 @@ class Turn {
   }
 
   returnCard() {
-    return this.card;
+    return this.flashCard;
   }
 
   evaluateGuess() {
@@ -24,7 +23,7 @@ class Turn {
   }
 
   giveFeedback() {
-    if(this.evaluateGuess()) {
+    if (this.evaluateGuess()) {
       return 'correct!';
     } else {
       return 'incorrect!';
