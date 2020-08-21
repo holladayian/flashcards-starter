@@ -1,6 +1,5 @@
 const Turn = require('./Turn');
 
-
 class Round {
   constructor(deck) {
     this.deck = deck.cardList;
@@ -14,18 +13,33 @@ class Round {
   }
 
   takeTurn(guess) {
+    this.instantiateTurn(guess);
+    this.countTurns();
+    this.evaluateGuess(guess);
+    this.shiftToNextCard();
+    return this.returnFeedback();
+  }
+
+  instantiateTurn(guess) {
     this.turn = new Turn(guess, this.returnCurrentCard());
-    // change this.turn to be a parameter
+  }
+
+  countTurns() {
+    this.turns++;
+  }
+
+  evaluateGuess(guess) {
     if (guess !== this.returnCurrentCard().correctAnswer) {
       this.incorrectGuesses.push(guess);
     }
-    this.turns++;
-    // consider breaking this functionality into Deck.js
-    // the Law of Demeter
+  }
+
+  shiftToNextCard() {
     this.deck.shift();
+  }
+
+  returnFeedback() {
     return this.turn.giveFeedback();
-    // maybe turn this.takeTurn into a handler function
-    // consider the readability
   }
 
   calculatePercentCorrect() {
@@ -37,9 +51,12 @@ class Round {
   }
 
   endRound() {
-    console.log(`** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`);
+    console.log(
+      `
+      ** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!
+      `
+    );
     return process.exit();
-    // return `** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`;
   }
 }
 

@@ -6,8 +6,13 @@ const Card = require('../src/Card');
 
 describe('Turn', () => {
   let card, turn1, turn2;
-  beforeEach(() => {
-    card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+  beforeEach( () => {
+    card = new Card(
+      1,
+      'What allows you to define a set of related information using key-value pairs?',
+      ['object', 'array', 'function'],
+      'object'
+    );
     turn1 = new Turn('Tuna Fish', card);
     turn2 = new Turn('object', card);
   })
